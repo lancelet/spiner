@@ -1,0 +1,33 @@
+# Instructions found here:
+#   http://docs.haskellstack.org/en/stable/GUIDE.html#travis-with-caching
+
+# use new container infrastructure to allow caching
+sudo: false
+
+# choose light-weight base image
+language: c
+
+# GHC depends on GMP
+addons:
+  apt:
+    packages:
+    - libgmp-dev
+
+# different configurations:
+env:
+- ARGS="--resolver lts-3.20"
+
+# set up caching
+cache:
+  directories:
+  - $HOME/.stack
+
+before_install:
+# Download and unpack the stack executable
+- mkdir -p ~/.local/bin
+- export PATH=$HOME/.local/bin:$PATH
+- travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+
+# build
+script: stack $ARGS --no-terminal --install-ghc test --haddock
+
