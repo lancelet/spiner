@@ -19,7 +19,8 @@ library
       Data.Spiner
   build-depends:
       base       >= 4.7  && < 5
-    , hmatrix    >= 0.16 && < 0.18
+    , hmatrix    >= 0.17 && < 0.18
+    , vector     >= 0.11 && < 0.12
 
 --executable spiner-exe
   --hs-source-dirs:      app
