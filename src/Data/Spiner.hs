@@ -1,8 +1,8 @@
 module Data.Spiner where
 
-import Data.Foldable (foldl')
-import qualified Data.Vector.Storable as VS
-import Numeric.LinearAlgebra
+import           Data.Foldable         (foldl')
+import qualified Data.Vector.Storable  as VS
+import           Numeric.LinearAlgebra
 
 type ActivationFn = Double -> Double
 type Weights = Matrix Double
