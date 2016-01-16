@@ -32,6 +32,4 @@ evalLayer :: ActivationFn    -- ^ activation function for all neurons
           -> Vector Double   -- ^ input vector (excluding constant term), length n
           -> Weights         -- ^ matrix of layer weights, size m x (n + 1)
           -> Vector Double   -- ^ output vector, length m
-evalLayer g i w = 
-  let i' = VS.cons (1.0) i
-  in VS.map g (w #> i')
+evalLayer g i w = VS.map g (w #> VS.cons (1.0) i)
