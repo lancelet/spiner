@@ -12,6 +12,7 @@ addons:
   apt:
     packages:
     - libgmp-dev
+    - liblapack-dev
 
 # different configurations:
 env:
