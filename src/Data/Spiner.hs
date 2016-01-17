@@ -33,3 +33,15 @@ evalLayer :: ActivationFn    -- ^ activation function for all neurons
           -> Weights         -- ^ matrix of layer weights, size m x (n + 1)
           -> Vector Double   -- ^ output vector, length m
 evalLayer g i w = VS.map g (w #> VS.cons (1.0) i)
+
+-- | Perform feed-forward propagation of a multi-layered ANN, keeping activations for all
+--   layers.
+--
+--   NOTE: The matrix of weights for each layer must be 1 column wider than the number of 
+--         inputs, with the first column being a weight for the constant factor.
+feedForwardScan :: ActivationFn      -- ^ activation function for all neurons
+                -> [ Weights ]       -- ^ matrices of layer weights
+                -> Vector Double     -- ^ input vector (excluding constant term)
+                -> [ Vector Double ] -- ^ activations of all layers (excl const terms)
+feedForwardScan g ws i = scanl (evalLayer g) i ws
+
